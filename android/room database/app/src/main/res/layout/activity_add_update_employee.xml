@@ -19,13 +19,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Employee name..."
             android:layout_margin="8dp">
 
             <EditText
                 android:text="@={addEmp.empName}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Employee name..."
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -33,13 +33,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Company name..."
             android:layout_margin="8dp">
 
             <EditText
                 android:text="@={addEmp.empPosition}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Company name..."
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -47,13 +47,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Company name..."
             android:layout_margin="8dp">
 
             <EditText
                 android:text="@={addEmp.empCompany}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Company name..."
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>

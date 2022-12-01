@@ -7,15 +7,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bhati.database.R
-import com.bhati.database.databinding.ActivityEmployeesBinding
+import com.bhati.jettpackroom.databinding.ActivityEmployeesBinding
 import com.bhati.jettpackroom.room.AppDatabase
 import com.bhati.jettpackroom.room.Employee
-import kotlinx.android.synthetic.main.activity_employees.*
 
 class EmployeesActivity : AppCompatActivity() {
     var binding: ActivityEmployeesBinding? = null
-    var empId: Int = 0
+    var empId: Int? = null
     var employeeList: ArrayList<Employee>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,29 +29,23 @@ class EmployeesActivity : AppCompatActivity() {
         binding!!.lifecycleOwner = this
 
         binding!!.btnUpdateEmp.setOnClickListener {
-            addUpdateOpration()
-        }
+            if (empId == null) {
+                startActivity(
+                    Intent(this, AddUpdateEmployeeActivity::class.java)
+                        .putExtra("empId", 0)
+                )
+            } else {
+                startActivity(
+                    Intent(this, AddUpdateEmployeeActivity::class.java)
+                        .putExtra("empId", empId)
+                )
+            }
 
+        }
         getEmpData(viewModal)
 
 
     }
-
-    private fun addUpdateOpration() {
-        if (empId == 0) {
-            startActivity(
-                Intent(this, AddUpdateEmployeeActivity::class.java)
-                    .putExtra("empId", 0)
-            )
-        } else {
-            startActivity(
-                Intent(this, AddUpdateEmployeeActivity::class.java)
-                    .putExtra("empId", empId)
-            )
-        }
-
-    }
-
 
     private fun getEmpData(viewModal: EmpViewModel) {
         binding!!.rvEmployees.layoutManager = LinearLayoutManager(this)

@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.bhati.jettpackroom.room.Employee
 
 class EmpViewModel(private val empReposatory: EmpReposatory) : ViewModel() {
-    val empName = MutableLiveData<String>()
-    val empPosition = MutableLiveData<String>()
-    val empCompany = MutableLiveData<String>()
-    val empId : Int= 0
+    var empName = MutableLiveData<String>()
+    var empPosition = MutableLiveData<String>()
+    var empCompany = MutableLiveData<String>()
+    var empId: Int = 0
+    val employees = empReposatory.emplist
 
     fun AddUpdateClick() {
         when {
@@ -29,10 +30,7 @@ class EmpViewModel(private val empReposatory: EmpReposatory) : ViewModel() {
                 while (empId == 0) {
                     empReposatory.addEmp(
                         Employee(
-                            0,
-                            empName.toString(),
-                            empPosition.toString(),
-                            empCompany.toString()
+                            0, empName.toString(), empPosition.toString(), empCompany.toString()
                         )
                     )
                 }
@@ -48,7 +46,26 @@ class EmpViewModel(private val empReposatory: EmpReposatory) : ViewModel() {
         }
     }
 
+    fun searchbyNameorCompany() {
+        when {
+            empName.value.isNullOrEmpty() -> {
+                Log.e("inserError...", "Enter employee name...")
+            }
+            empCompany.value.isNullOrEmpty() -> {
+                Log.e("inserError...", "Enter employee company...")
+            }
+            else -> {
+                empReposatory.getEmpByCompanyorEmpname(
+                    empName.value.toString(),
+                    empCompany.value.toString()
+                )
+            }
+        }
+    }
 
-    val employees = empReposatory.emplist
+    fun searchUserById(empId: Int) {
+        empReposatory.selectEmp(empId)
+    }
+
 
 }
